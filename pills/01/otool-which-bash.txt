@@ -1,0 +1,3 @@
+$ otool -L `which bash`
+/nix/store/s4zia7hhqkin1di0f187b79sa2srhv6k-bash-4.2-p45/bin/bash:
+    /nix/store/pbfbn27lwkrr2305i0cnxhbs6hpg7rlc-Libsystem-osx-10.11.6/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1226.10.1)
