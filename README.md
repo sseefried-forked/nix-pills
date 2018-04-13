@@ -9,14 +9,23 @@ https://nixos.org/nixos/nix-pills/
 
 When starting a new Pill, comment on the tracking issue which one
 you're doing. If you need help, ask there. If you make progress but
-don't finish in one go, make a PR anyway! I'm trying to not edit
+don't finish in one go, make a PR anyway! I'm trying not to edit
 things as I go, in order to not get bogged down.
 
-How I've built and tested:
+### Building and testing
 
-`nix-build release.nix && firefox result/share/doc/nix-pills/index.html`
+Build a development release with:
 
-Emacs config for a nice docbook experience:
+    $ nix build -f release.nix
+
+and then you will find `index.html` at path
+`result/share/doc/nix-pills/index.html`.
+
+You can build and open with one command. e.g.
+
+    $ nix build -f release.nix && firefox result/share/doc/nix-pills/index.html
+
+### Emacs config for a nice docbook experience
 
  ```nix
  let
