@@ -27,7 +27,7 @@
     <title>Installation</title>
 
     <para>
-      To install Nix, run <command>curl https://nixos.org/nix/install | sh</command>
+      To install Nix, run <literal>curl https://nixos.org/nix/install | sh</literal>
       as a non-root user and follow the instructions. Alternatively, you may
       prefer to download the installation script and verify its integrity using
       GPG signatures. Instructions for doing so can be found here: <link
@@ -62,20 +62,47 @@
       Start looking at the output of the install command:
     </para>
 
-    <screen>copying Nix to /nix/store..........................</screen>
+    <screen width="80">I am executing:
+
+    $ sudo rsync -rlpt ./store/1a1p91qp0m8fl1pgwkxgizsa38ikyapd-bzip2-1.0.6.0.1
+    ./store/25jny6lbqbbyr7fnxqhpllpmp5skriw0-openssl-1.0.2n ./store/2f1wr1a4qd4a
+    ckrxapixz1whx5yyza2a-aws-sdk-cpp-1.3.22 ./store/69lqxpffc4rvkc8rv3ddifch9nwv
+    ajrn-gnutar-1.30 ./store/69yzhzc71jhxpjg5gzddj6ifvph3fxp5-CF-osx-10.10.5 ./s
+    tore/cbggag3yf0lv40sr69rs7kx69hx54991-libc++abi-4.0.1 ./store/cdz64xmn25p1fz
+    b1db7zr1464gvvvmfx-xz-5.2.3 ./store/d2ayiz3l18l06w67jmc4lgz8b0v1dls4-nss-cac
+    ert-3.34.1 ./store/fy066pzvv5d4c1z6p5wbmb9f9d56p5a3-curl-7.58.0 ./store/g4md
+    rmhk7p37xmspi9fivgqvil46jj0z-bzip2-1.0.6.0.1-bin ./store/gcp4ksfjyfj5frayih5
+    r9wwznb6lhzp8-libiconv-osx-10.11.6 ./store/ghdvf8lcibwkj9964zcxqdn6sq50iq1m-
+    xz-5.2.3-bin ./store/gih2dhmydg7pz7wn4g6jkvlhq7zh1a3h-zlib-1.2.11 ./store/hx
+    p1rndy9m3bgawcdrc6qda0mh9dp18d-libatomic_ops-7.6.2 ./store/il23i84c7p1g307xv
+    9qasazsgmm4lmkb-gettext-0.19.8 ./store/lc19207wmbvz14k1zd2y4vnq8903qrgh-sqli
+    te-3.21.0 ./store/mzn9nskhyf6nn5nacwp851418x3b1z57-Libsystem-osx-10.11.6 ./s
+    tore/n7lyzjc6r824x94skh2ssf66aixa5y29-libkrb5-1.15.2 ./store/nf0b8v50i4wpx66
+    b00w1d09yy9vp3lhv-gzip-1.9 ./store/njdy9kb8qvlh94jk3fck1h3qvpqfkhqs-brotli-1
+    .0.2-lib ./store/pv8907a1wh91qvrnqnqj77pcsnyj7l55-boehm-gc-7.6.2 ./store/pvw
+    c2pkr54z8bnh65lmbrz0h5m3pzn2h-coreutils-8.29 ./store/q13lag2ns8d2rwxw158k06z
+    6qk9sf7ji-ICU-osx-10.10.5 ./store/s8mff1kmnc63b21ybdid2ni0fw7mzy7r-bash-4.4-
+    p12 ./store/szvzvj8v3ilv73ly2y3axl5w01zy8ac5-libssh2-1.8.0 ./store/x61l90100
+    9j3r599zlhnd112fy4qjq3a-libsodium-1.0.16 ./store/xmi4fylvx4qc79ji9v5q3zfy9vf
+    dy4sv-nix-2.0 ./store/yd3bi1p0b7wwd0cgjwy77wh549dm5x3d-libc++-4.0.1 ./store/
+    z5w22j8m4lidv0bjjnrn8nzj2ra4il0p-gmp-6.1.2 /nix/store/
+
+to copy the basic Nix files to the new store at /nix/store
+
+      Alright! We have our first nix at /nix/store/xmi4fylvx4qc79ji9v5q3zfy9vfdy4sv-nix-2.0
+    </screen>
 
     <para>
       That's the <filename>/nix/store</filename> we
-      were talking in the first article. We're copying in the 
+      were talking in the first article. We're copying in the
       necessary software to bootstrap a Nix system. You can see bash,
-      coreutils, the C compiler toolchain, perl libraries, sqlite and Nix itself
-      with its own tools and libnix.
+      coreutils, the C compiler toolchain, sqlite and Nix itself.
     </para>
 
     <para>
       You may have noticed that <filename>/nix/store</filename> can contain
       not only directories, but also files, still always in the form
-      <replaceable>hash-name</replaceable>.
+      <replaceable>&lt;hash&gt;-&lt;name&gt;</replaceable>.
     </para>
   </section>
 
@@ -87,11 +114,16 @@
       initializes a database:
     </para>
 
-    <screen>initialising Nix database...</screen>
+    <screen>I am executing:
+
+    $ sudo /nix/store/xmi4fylvx4qc79ji9v5q3zfy9vfdy4sv-nix-2.0/bin/nix-store --init
+
+to initialize the Nix Database
+</screen>
 
     <para>
       Yes, Nix also has a database. It's stored under
-      <filename>/nix/var/nix/db</filename>. It is a sqlite database
+      <filename>/nix/var/nix/db</filename>. It is an sqlite database
       that keeps track of the dependencies between derivations.
     </para>
 
@@ -129,11 +161,9 @@
       xlink:href="https://nixos.org/nix/manual/#sec-profiles">profile</link>:
     </para>
 
-    <xi:include href="./02/user-environment.xml" parse="xml" />
-
     <para>
       A profile in Nix is a general and convenient concept for
-      realizing rollbacks. Profiles are used to compose 
+      realizing rollbacks. Profiles are used to compose
       components that are spread among multiple paths under a new
       unified path. Not only that, but profiles are made up of multiple
       "generations": they are versioned. Whenever you change a profile,
@@ -152,7 +182,7 @@
     <xi:include href="./02/profile.xml" parse="xml" />
     <para>
      That <package>nix-1.7</package> derivation in the Nix store is
-     Nix itself, with binaries and libraries. The process of "installing" 
+     Nix itself, with binaries and libraries. The process of "installing"
      the derivation in the profile basically reproduces the hierarchy of the
      <package>nix-1.7</package> store derivation in the profile by means of
      symbolic links.
@@ -239,7 +269,7 @@
       does is simply to add <filename>~/.nix-profile/bin</filename> to
       <varname>PATH</varname> and
       <filename>~/.nix-defexpr/channels/nixpkgs</filename> to
-      <varname>NIX_PATH</varname>. We'll discuss 
+      <varname>NIX_PATH</varname>. We'll discuss
       <varname>NIX_PATH</varname> later.
     </para>
 

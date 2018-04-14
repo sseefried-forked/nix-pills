@@ -1,6 +1,6 @@
-<screen>$ ls -l ~/.nix-profile/
-bin -> /nix/store/clnpynyac3hx3a6z5lsy893p7b4rwnyf-<emphasis role="strong">nix-1.7</emphasis>/bin
-[...]
-manifest.nix -> /nix/store/82dg18wz250vvcxjbclgyy5yg2kfz1gw-<emphasis role="strong">env-manifest.nix</emphasis>
-[...]
-share -> /nix/store/clnpynyac3hx3a6z5lsy893p7b4rwnyf-<emphasis role="strong">nix-1.7</emphasis>/share</screen>
+<screen>$ ls -lH ~/.nix-profile/
+    total 12
+lrwxr-xr-x 1 root wheel 65 Jan  1  1970 bin -> /nix/store/j3bcf7mmiixcld846kydd7nwa53aawag-sqlite-3.22.0-bin/bin
+lrwxr-xr-x 1 root wheel 60 Jan  1  1970 manifest.nix -> /nix/store/gv38fa650f5c3qq9bix7386abwakqsvn-env-manifest.nix
+lrwxr-xr-x 1 root wheel 67 Jan  1  1970 share -> /nix/store/j3bcf7mmiixcld846kydd7nwa53aawag-sqlite-3.22.0-bin/share
+</screen>
